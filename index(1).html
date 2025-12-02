@@ -43,7 +43,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // 1. DATA (Sudah ditambah gambar)
+        
         const phoneData = [
             {
                 name: "iPhone X",
@@ -65,11 +65,11 @@
             },
         ];
 
-        // 2. KOMPONEN PRODUCT (Anak)
+        
         function Product({ name, price, discount = 0, imgUrl }) {
             return (
                 <div className="card">
-                    {/* Tampilkan Gambar */}
+                    { }
                     <img src={imgUrl} alt={name} />
 
                     <h3>{name}</h3>
@@ -81,7 +81,7 @@
             );
         }
 
-        // 3. KOMPONEN APP (Induk)
+        
         function App() {
             return (
                 <div>
@@ -101,11 +101,12 @@
             );
         }
 
-        // 4. RENDER KE HTML
+        
         const container = document.getElementById('root');
         const root = ReactDOM.createRoot(container);
         root.render(<App />);
     </script>
 </body>
+
 
 </html>
