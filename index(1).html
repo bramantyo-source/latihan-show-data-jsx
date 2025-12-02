@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar React - Latihan 1</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <style>
+        /* Sedikit style biar rapi */
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            width: 250px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // 1. DATA (Sudah ditambah gambar)
+        const phoneData = [
+            {
+                name: "iPhone X",
+                price: 10000000,
+                discount: 50,
+                imgUrl: "./iphone_x.png"
+            },
+            {
+                name: "Oppo Find X",
+                price: 14000000,
+                discount: 30,
+                imgUrl: "https://www.oppo.com/content/dam/oppo/common/mkt/v2-2/find-x8-series-en/find-x8/products/black-pink-titanium.png"
+            },
+            {
+                name: "Redmi Note X",
+                price: 5000000,
+                discount: 42,
+                imgUrl: "https://completeselular.co.id/wp-content/uploads/2022/04/note-10-pro-blue-600x600.png"
+            },
+        ];
+
+        // 2. KOMPONEN PRODUCT (Anak)
+        function Product({ name, price, discount = 0, imgUrl }) {
+            return (
+                <div className="card">
+                    {/* Tampilkan Gambar */}
+                    <img src={imgUrl} alt={name} />
+
+                    <h3>{name}</h3>
+
+                    {discount > 0 && <p style={{ color: "gray" }}><s>Rp {price}</s> ({discount}%)</p>}
+
+                    <p><b>Rp {parseInt(price) - parseInt(price) * (parseInt(discount) / 100)}</b></p>
+                </div>
+            );
+        }
+
+        // 3. KOMPONEN APP (Induk)
+        function App() {
+            return (
+                <div>
+                    <h1>Daftar Produk HP</h1>
+                    <div className="container">
+                        {phoneData.map((phone, id) => (
+                            <Product
+                                key={id}
+                                name={phone.name}
+                                price={phone.price}
+                                discount={phone.discount}
+                                imgUrl={phone.imgUrl}
+                            />
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // 4. RENDER KE HTML
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
